@@ -1,4 +1,5 @@
-function typedArrayToURL(typedArray, mimeType) {
+<script>
+  function typedArrayToURL(typedArray, mimeType) {
   return URL.createObjectURL(new Blob([typedArray.buffer], {type: mimeType}))
 }
 
@@ -15,3 +16,4 @@ link.href = url;
 link.innerText = 'Open the array URL';
 
 document.body.appendChild(link);
+</script>
