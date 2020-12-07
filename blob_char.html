@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <script>
+        var blob = new Blob([`aaa\u001B$@<textarea>\u001B(B<script>alert('xss');alert(document.charset)<\/script></textarea>bbb`], {
+          type: "text/html;charset=utf-8"//this charset should be used
+        });
+            function blobToString(b) {
+        var u, x;
+        u = URL.createObjectURL(b);
+        x = new XMLHttpRequest();
+        x.open('GET', u, false); // although sync, you're not fetching over internet
+        x.send();
+        URL.revokeObjectURL(u);
+        return x.responseText;
+        }
+        document.write(blobToString(blob));
+    </script>
+</body>
+</html>
